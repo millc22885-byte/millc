@@ -30,7 +30,7 @@ export default function Header() {
             <Image
               src="/logo.svg"
               alt={siteConfig.name}
-              width={160}
+              width={140}
               height={40}
               className="h-9 w-auto"
               priority

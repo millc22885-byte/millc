@@ -25,6 +25,9 @@ export const metadata = {
   },
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.url),
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default async function RootLayout({ children }) {

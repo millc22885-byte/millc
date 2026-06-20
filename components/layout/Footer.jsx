@@ -18,7 +18,7 @@ export default function Footer() {
             <Image
               src="/logo.svg"
               alt={siteConfig.name}
-              width={160}
+              width={140}
               height={40}
               className="h-10 w-auto mb-4 brightness-0 invert"
             />
