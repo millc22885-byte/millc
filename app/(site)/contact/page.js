@@ -4,7 +4,7 @@ import ContactHeader from "@/components/contact/ContactHeader";
 
 export const metadata = {
   title: "Contact",
-  description: "Get in touch with Mill Cauto to schedule a viewing or ask about our collection.",
+  description: "Get in touch with MillC to schedule a viewing or ask about our collection.",
 };
 
 export default function ContactPage() {

@@ -9,6 +9,9 @@ import CarInquiryPanel from "@/components/cars/CarInquiryPanel";
 export default function CarDetailContent({ car }) {
   const { t } = useLanguage();
   const localizedCar = useLocalizedCar(car);
+  const features = (localizedCar.features ?? []).filter((feature) =>
+    feature?.trim()
+  );
 
   return (
     <section className="py-16">
@@ -55,15 +58,15 @@ export default function CarDetailContent({ car }) {
               </div>
             </div>
 
-            {localizedCar.features?.length > 0 && (
+            {features.length > 0 && (
               <div className="bg-white rounded-lg shadow-md p-8">
                 <h2 className="font-display text-4xl mb-6 tracking-wide">
                   {t("features")}
                 </h2>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {localizedCar.features.map((feature) => (
+                  {features.map((feature, index) => (
                     <li
-                      key={feature}
+                      key={`${index}-${feature}`}
                       className="flex items-start gap-2 text-zinc-700"
                     >
                       <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />

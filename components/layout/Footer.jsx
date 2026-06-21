@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/language-provider";
-import { getWhatsAppUrl, siteConfig } from "@/constants/site";
+import { getPhoneTelHref, getWhatsAppUrl, siteConfig } from "@/constants/site";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
 export default function Footer() {
@@ -50,12 +50,22 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-blue-400 mt-0.5 shrink-0" />
-                <span className="text-slate-300">{siteConfig.contact.address}</span>
+                <div className="min-w-0">
+                  <p className="text-slate-300 text-sm leading-snug">
+                    {siteConfig.contact.addresses.map((office) => office.shortLabel).join(" · ")}
+                  </p>
+                  <Link
+                    href="/contact"
+                    className="text-blue-400 hover:text-blue-300 text-sm mt-1 inline-block transition-colors"
+                  >
+                    {t("viewAllOffices")}
+                  </Link>
+                </div>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-blue-400 shrink-0" />
                 <a
-                  href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}
+                  href={getPhoneTelHref()}
                   className="text-slate-300 hover:text-blue-400 transition-colors"
                 >
                   {siteConfig.contact.phone}

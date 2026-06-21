@@ -1,14 +1,15 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import WhatsAppButton from "@/components/layout/WhatsAppButton";
+import { cookies } from "next/headers";
+import SiteProviders from "@/components/providers/SiteProviders";
+import { DEFAULT_LANGUAGE, isSupportedLanguage } from "@/lib/i18n/config";
 
-export default function SiteLayout({ children }) {
+export default async function SiteLayout({ children }) {
+  const cookieStore = await cookies();
+  const savedLanguage = cookieStore.get("millcautos-lang")?.value;
+  const initialLanguage = isSupportedLanguage(savedLanguage)
+    ? savedLanguage
+    : DEFAULT_LANGUAGE;
+
   return (
-    <>
-      <Header />
-      <main className="flex-1">{children}</main>
-      <Footer />
-      <WhatsAppButton />
-    </>
+    <SiteProviders initialLanguage={initialLanguage}>{children}</SiteProviders>
   );
 }

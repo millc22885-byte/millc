@@ -26,7 +26,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-zinc-200">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-stretch justify-between h-16 lg:h-[72px]">
-          <Link href="/" className="flex items-center shrink-0">
+          <Link href="/" className="flex items-center gap-2.5 shrink-0">
             <Image
               src="/logo.svg"
               alt={siteConfig.name}
@@ -35,6 +35,9 @@ export default function Header() {
               className="h-9 w-auto"
               priority
             />
+            <span className="font-display text-2xl tracking-wide text-zinc-900 uppercase">
+              {siteConfig.name}
+            </span>
           </Link>
 
           <nav className="hidden lg:flex flex-1 items-stretch justify-center gap-10">

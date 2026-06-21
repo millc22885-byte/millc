@@ -1,16 +1,15 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   DEFAULT_LANGUAGE,
   isSupportedLanguage,
   LANGUAGE_COOKIE_NAME,
   LANGUAGE_STORAGE_KEY,
 } from "./config";
+import { LanguageContext } from "./language-context";
 import { formatPrice as formatPriceUtil } from "./format";
 import { translations } from "./translations";
-
-const LanguageContext = createContext(null);
 
 function persistLanguage(language) {
   try {
@@ -61,10 +60,4 @@ export function LanguageProvider({ children, initialLanguage = DEFAULT_LANGUAGE 
   );
 }
 
-export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error("useLanguage must be used within LanguageProvider");
-  }
-  return context;
-}
+export { useLanguage } from "./language-context";

@@ -3,7 +3,7 @@
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/lib/i18n/language-provider";
-import { getWhatsAppUrl, siteConfig } from "@/constants/site";
+import { getPhoneTelHref, getWhatsAppUrl, siteConfig } from "@/constants/site";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
 export default function ContactForm() {
@@ -29,17 +29,32 @@ export default function ContactForm() {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
       <div className="lg:col-span-1 space-y-8">
         <div className="bg-white rounded-lg shadow-md p-8">
+          <div className="flex items-start space-x-4 mb-6">
+            <div className="shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center shadow-md">
+              <MapPin className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h3 className="font-display text-2xl mb-3 tracking-wide">{t("visitUs")}</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm text-zinc-600">
+                {siteConfig.contact.addresses.map((office) => (
+                  <div key={office.country}>
+                    <p className="font-medium text-zinc-800 mb-0.5">{office.country}</p>
+                    <p className="leading-snug">{office.lines.join(", ")}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {[
-            {
-              icon: MapPin,
-              title: t("visitUs"),
-              lines: siteConfig.contact.address.split(", "),
-            },
             {
               icon: Phone,
               title: t("callUs"),
-              lines: [siteConfig.contact.phone, t("weekdayHours")],
-              href: `tel:${siteConfig.contact.phone.replace(/\s/g, "")}`,
+              lines: [
+                `${t("phoneFax")}: ${siteConfig.contact.phone}`,
+                t("weekdayHours"),
+              ],
+              href: getPhoneTelHref(),
             },
             {
               icon: WhatsAppIcon,
@@ -51,7 +66,7 @@ export default function ContactForm() {
             {
               icon: Mail,
               title: t("emailUs"),
-              lines: [siteConfig.contact.email, siteConfig.contact.salesEmail],
+              lines: [siteConfig.contact.email],
             },
             {
               icon: Clock,

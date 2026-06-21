@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { DollarSign, Hash, Mail } from "lucide-react";
+import { Hash, Mail } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/language-provider";
 import { useLocalizedCar } from "@/lib/i18n/use-localized-car";
 import { getWhatsAppUrl, siteConfig } from "@/constants/site";
@@ -22,14 +22,11 @@ export default function CarInquiryPanel({ car }) {
         </div>
       )}
 
-      <div className="flex items-center space-x-3 mb-6">
-        <DollarSign className="w-8 h-8 text-zinc-900" />
-        <div>
-          <p className="text-sm text-zinc-500">{t("price")}</p>
-          <p className="font-display text-4xl tracking-wide">
-            {localizedCar.formattedPrice}
-          </p>
-        </div>
+      <div className="mb-6">
+        <p className="text-sm text-zinc-500">{t("price")}</p>
+        <p className="font-display text-4xl tracking-wide">
+          {localizedCar.formattedPrice}
+        </p>
       </div>
 
       <a

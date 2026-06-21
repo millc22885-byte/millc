@@ -5,7 +5,7 @@ import AboutStats from "@/components/about/AboutStats";
 export const metadata = {
   title: "About Us",
   description:
-    "Learn about Mill Cauto — over 20 years of excellence in luxury automotive sales.",
+    "Learn about MillC — over 20 years of excellence in luxury automotive sales.",
 };
 
 const heroImage =

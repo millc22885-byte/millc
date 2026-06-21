@@ -1,14 +1,52 @@
 export const siteConfig = {
-  name: "Mill Cauto",
+  name: "MillC",
   description:
     "Premier luxury car dealership specializing in high-end vehicles from around the world.",
   url: "https://millcauto.com",
   contact: {
-    address: "123 Luxury Avenue, Tokyo, Japan 100-0001",
-    phone: "+81 90-7313-7917",
-    whatsapp: "+81 90-7313-7917",
-    email: "info@millcauto.com",
-    salesEmail: "sales@millcauto.com",
+    phone: "0567-40-9093",
+    fax: "0567-40-9093",
+    whatsapp: "+81 567-40-9093",
+    email: "millc22885@gmail.com",
+    addresses: [
+      {
+        country: "United Kingdom",
+        shortLabel: "Manchester, UK",
+        lines: [
+          "44 Peregrine Street",
+          "Manchester, England",
+          "United Kingdom M15 5PU",
+        ],
+      },
+      {
+        country: "Ireland",
+        shortLabel: "Dublin, Ireland",
+        lines: [
+          "708 Bdg 8, Vantage West",
+          "Central Park",
+          "Dublin 18",
+          "D18 WE88",
+        ],
+      },
+      {
+        country: "Australia",
+        shortLabel: "Wellard, WA",
+        lines: [
+          "28 Portobello Parade",
+          "Wellard 6170",
+          "Western Australia",
+        ],
+      },
+      {
+        country: "Japan",
+        shortLabel: "Aichi, Japan",
+        lines: [
+          "497-0034",
+          "Aichi Ken, Ama Gun, Kanie Cho",
+          "Honmachi 2-47",
+        ],
+      },
+    ],
     hours: {
       weekday: "Monday - Friday: 9:00 AM - 7:00 PM",
       saturday: "Saturday: 10:00 AM - 6:00 PM",
@@ -22,6 +60,14 @@ export const siteConfig = {
     { labelKey: "contact", href: "/contact" },
   ],
 };
+
+export function getPhoneTelHref(phone = siteConfig.contact.phone) {
+  const digits = phone.replace(/\D/g, "");
+  if (digits.startsWith("0")) {
+    return `tel:+81${digits.slice(1)}`;
+  }
+  return `tel:+${digits}`;
+}
 
 export function getWhatsAppUrl(message) {
   const digits = siteConfig.contact.whatsapp.replace(/\D/g, "");

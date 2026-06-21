@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import SanityImage from "@/components/ui/SanityImage";
 import { ArrowRight, Car, Sparkles } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/language-provider";
 import { useLocalizedCar } from "@/lib/i18n/use-localized-car";
@@ -15,7 +15,7 @@ export default function CarCard({ car, variant = "default" }) {
     <article className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-slate-200">
       <div className="relative h-64 overflow-hidden bg-slate-100">
         {localizedCar.image ? (
-          <Image
+          <SanityImage
             src={localizedCar.image}
             alt={localizedCar.name}
             fill

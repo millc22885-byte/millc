@@ -1,13 +1,20 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Car } from "lucide-react";
+import SanityImage from "@/components/ui/SanityImage";
 
 export default function CarImageGallery({ images, alt }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const hasImages = images?.length > 0;
-  const activeImage = hasImages ? images[activeIndex] : null;
+
+  useEffect(() => {
+    if (!hasImages) return;
+    images.forEach((image) => {
+      const img = new window.Image();
+      img.src = image.url;
+    });
+  }, [hasImages, images]);
 
   if (!hasImages) {
     return (
@@ -22,17 +29,23 @@ export default function CarImageGallery({ images, alt }) {
 
   return (
     <section className="bg-slate-900">
-      <div className="relative h-72 sm:h-96 md:h-[520px]">
-        <Image
-          src={activeImage.url}
-          alt={activeImage.alt ?? alt}
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
+      <div className="relative h-72 sm:h-96 md:h-[520px] overflow-hidden">
+        {images.map((image, index) => (
+          <SanityImage
+            key={`${image.url}-${index}`}
+            src={image.url}
+            alt={image.alt ?? alt}
+            fill
+            className={`object-cover ${
+              index === activeIndex ? "z-10 opacity-100" : "z-0 opacity-0"
+            }`}
+            priority={index === 0}
+            loading={index === 0 ? undefined : "eager"}
+            sizes="100vw"
+          />
+        ))}
         {images.length > 1 && (
-          <div className="absolute bottom-4 right-4 bg-black/60 text-white text-sm px-3 py-1 rounded-full">
+          <div className="absolute bottom-4 right-4 z-20 bg-black/60 text-white text-sm px-3 py-1 rounded-full">
             {activeIndex + 1} / {images.length}
           </div>
         )}
@@ -43,7 +56,7 @@ export default function CarImageGallery({ images, alt }) {
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin">
             {images.map((image, index) => (
               <button
-                key={image.url}
+                key={`${image.url}-${index}`}
                 type="button"
                 onClick={() => setActiveIndex(index)}
                 className={`relative shrink-0 w-24 h-16 sm:w-32 sm:h-20 rounded-lg overflow-hidden border-2 transition-all ${
@@ -53,8 +66,8 @@ export default function CarImageGallery({ images, alt }) {
                 }`}
                 aria-label={`View photo ${index + 1}`}
               >
-                <Image
-                  src={image.url}
+                <SanityImage
+                  src={image.thumbUrl ?? image.url}
                   alt={image.alt ?? `${alt} photo ${index + 1}`}
                   fill
                   className="object-cover"

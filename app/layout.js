@@ -1,6 +1,5 @@
 import { Bebas_Neue, Montserrat } from "next/font/google";
 import { cookies } from "next/headers";
-import { LanguageProvider } from "@/lib/i18n/language-provider";
 import { DEFAULT_LANGUAGE, isSupportedLanguage } from "@/lib/i18n/config";
 import { siteConfig } from "@/constants/site";
 import "./globals.css";
@@ -42,11 +41,7 @@ export default async function RootLayout({ children }) {
       lang={initialLanguage}
       className={`${bebas.variable} ${montserrat.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <LanguageProvider initialLanguage={initialLanguage}>
-          {children}
-        </LanguageProvider>
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

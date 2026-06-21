@@ -8,7 +8,7 @@ import { schemaTypes } from "./sanity/schemaTypes";
 
 export default defineConfig({
   name: "millcautos",
-  title: "Mill Cauto",
+  title: "MillC",
   basePath: "/studio",
   projectId,
   dataset,
