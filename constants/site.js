@@ -57,6 +57,7 @@ export const siteConfig = {
     { labelKey: "home", href: "/" },
     { labelKey: "about", href: "/about" },
     { labelKey: "collection", href: "/collection" },
+    { labelKey: "blog", href: "/blog" },
     { labelKey: "contact", href: "/contact" },
   ],
 };
